@@ -29,7 +29,7 @@
 #include "301/CO_driver.h"
 #include "301/CO_ODinterface.h"
 #include "301/CO_Emergency.h"
-
+#include "canopen_al.h"
 
 /* default configuration, see CO_config.h */
 #ifndef CO_CONFIG_SYNC
@@ -227,7 +227,7 @@ static inline CO_ReturnError_t CO_SYNCsend(CO_SYNC_t *SYNC) {
     SYNC->timer = 0;
     SYNC->CANrxToggle = SYNC->CANrxToggle ? false : true;
     SYNC->CANtxBuff->data[0] = SYNC->counter;
-    return CO_CANsend(SYNC->CANdevTx, SYNC->CANtxBuff);
+    return CO_CANprepare(SYNC->CANdevTx, SYNC->CANtxBuff);
 }
 #endif
 
